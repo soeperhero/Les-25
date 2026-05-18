@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pixel Kingdom - Fan Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="CSS/CSS.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="Afbeeldingen/Favicon2.png">
+</head>
+<body>
+<header>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<div class="container">
+<div class="navbar-brand d-flex align-items-center gap-2">
+<a class="navbar-brand d-flex align-items-center" href="index.html"><img src="Afbeeldingen/Logo2.png" alt="Pixel Kingdom logo" width="32" height="32" class="me-2"><span>Pixel Kingdom</span></a>
+</div>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+<span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="news.html">News</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="game.html#section1">Dimensions</a></li>
+<li><a class="dropdown-item" href="game.html#section2">Biomes</a></li>
+<li><a class="dropdown-item" href="game.html#section3">Food</a></li>
+<li><a class="dropdown-item" href="game.html#section4">Weapons</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="Gallery.html">Gallery</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+</ul>
+</div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</header>
+<main class="container-sm">
+<div class="content-narrow">
+<div class="mt-2">
+<h1 class="hello-title">Get in touch!</h1>
+<div class="contact-wrapper">
+<img src="Afbeeldingen/contactasian.png" alt="Pngtree" class="contactasian-png">
+<p class="lead">Got questions, ideas, or cool Minecraft tips to share? We’d love to hear from you! Whether you want to talk about the latest news, suggest something for the gallery, or discuss game mechanics, this is the place to reach out. Our Pixel Kingdom is built by the community, and your input helps it grow even more. Found something awesome or spotted a hidden gem in the game? Let us know! You can also use this form for feedback to help improve the site. We try to respond as quickly as possible, so don’t be shy. Fill out the form below and join the conversation. Let’s keep building together, one block at a time!</p>
+</div>
+
+<form id="contactform" action="https://formspree.io/f/mbdroonj" method="post">
+<input type="text" name="firstname" placeholder="First Name" maxlength="20"/>
+<input type="text" name="lastname" placeholder="Last Name" maxlength="20"/>
+<input type="email" name="email" required placeholder="E-mail"/>
+<input type="hidden" name="_subject" value="Website contact"/>
+<div class="textarea-wrapper">
+<textarea id="message" name="message" placeholder="Your Message" maxlength="1000" rows="6" required></textarea>
+<input type="text" name="_gotcha" style="display:none"/>
+<input type="submit" value="Send">
+<small><span id="charsLeft">1000</span> characters left</small>
+</div>
+</div>
+</form>
+</div>
+</div>
+</main>
+<footer class="footer text-center">© 2026 CP - All Rights Reserved</footer>
+<script>
+const textarea = document.getElementById('message');
+const counter = document.getElementById('charsLeft');
+const max = textarea.maxLength;
+function updateCount() {
+const used = textarea.value.length;
+counter.textContent = max - used;
+}
+textarea.addEventListener('input', updateCount);
+updateCount(); // set correct value on page load
+</script>
+</body>
+</html>

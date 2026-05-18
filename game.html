@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pixel Kingdom - Fan Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Your CSS -->
+<link rel="stylesheet" href="CSS/CSS.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Afbeeldingen/Favicon2.png">
+
+<!-- jQuery + jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+<!-- ✅ SCRIPT -->
+<script>
+$(function () {
+
+  const $accordion = $("#accordion");
+
+  $accordion.accordion({
+    active: false,
+    collapsible: true,
+    heightStyle: "content",
+    animate: 200
+  });
+
+  function openSectionByHash(hash) {
+    const header = document.querySelector(hash);
+    if (!header) return;
+
+    const headers = document.querySelectorAll("#accordion > h3");
+    const index = Array.from(headers).indexOf(header);
+    if (index === -1) return;
+
+    $accordion.accordion("option", "active", index);
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: header.getBoundingClientRect().top + window.scrollY - 100,
+        behavior: "smooth"
+      });
+    }, 200);
+  }
+
+  /* ✅ 1. OPEN ON PAGE LOAD (from other pages) */
+  if (window.location.hash) {
+    openSectionByHash(window.location.hash);
+  }
+
+  /* ✅ 2. OPEN WHEN CLICKING SUBMENU ON SAME PAGE */
+  $(".dropdown-item").on("click", function (e) {
+    const href = this.getAttribute("href");
+    if (!href || !href.includes("#")) return;
+
+    const hash = href.substring(href.indexOf("#"));
+
+    // Only intercept if we're already on game.html
+    if (window.location.pathname.endsWith("game.html")) {
+      e.preventDefault();
+      openSectionByHash(hash);
+      history.replaceState(null, "", hash); // update URL nicely
+    }
+  });
+
+});
+</script>
+
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<div class="container">
+<div class="navbar-brand d-flex align-items-center gap-2">
+<a class="navbar-brand d-flex align-items-center" href="index.html"><img src="Afbeeldingen/Logo2.png" alt="Pixel Kingdom logo" width="32" height="32" class="me-2"><span>Pixel Kingdom</span></a>
+</div>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+<span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="news.html">News</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="game.html#section1">Dimensions</a></li>
+<li><a class="dropdown-item" href="game.html#section2">Biomes</a></li>
+<li><a class="dropdown-item" href="game.html#section3">Food</a></li>
+<li><a class="dropdown-item" href="game.html#section4">Weapons</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="Gallery.html">Gallery</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+</ul>
+</div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</header>
+<main class="container-sm mt-5 pt-5">
+<div id="accordion">
+<h3 id="section1">Dimensions</h3>
+<div><p>In Minecraft, there are three primary, official dimensions included in vanilla gameplay: the Overworld, the Nether, and the End. Each realm features completely unique biomes, structures, resources, and survival mechanics.</p>
+<p><h2>The 3 Official Dimensions</h2></p>
+<p><h5>1. The Overworld</h5></p>
+<p>Overworld is the primary dimension and starting point of every game. It is designed to be the most diverse, closely resembling Earth with varied biomes (such as forests, deserts, and oceans) and features a traditional day-and-night cycle.</p>
+<p><h5>The Nether</h5></p>
+<p>Often considered the underworld, this dimension is highly volatile, filled with lava oceans, and functions on a different spatial rule. Traveling 1 block in the Nether translates to 8 blocks in the Overworld, making it vital for rapid transit.</p>
+<p><h5>3. The End</h5></p>
+<p>A desolate, space-like realm consisting of floating islands made of end stone, located far out in the void. This is the final endgame dimension where you fight the Ender Dragon.</p>
+</div>
+<h3 id="section2">Biomes</h3>
+<div><p></p>Biomes are the different areas of Minecraft, across the overworld, Nether, and The End. Each is vast, varied, and full of things you need to survive, from the buried treasures found in the oceans to the exotic loot found in the Deep Dark. As you randomly generate each world, there are never any guarantees about where you'll find the Minecraft biome you're looking for, but there are clues to follow if you pay close enough attention.</p></div>
+<h3 id="section3">Food</h3>
+<div>fdsafds...</div>
+<h3 id="section4">Weapons</h3>
+<div>adfds...</div>
+</div>
+<noscript>To use this website optimally, it is necessary to enable JavaScript.</noscript>
+</main>
+<footer class="footer text-center">© 2026 CP - All Rights Reserved</footer>
+</body>
+</html>

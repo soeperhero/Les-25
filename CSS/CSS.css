@@ -1,0 +1,369 @@
+/* =====================================
+   1. RESET & BASE
+   ===================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 3.5rem; /* ✅ navbar spacing fixed */
+  background-color: #fff;
+  color: #000;
+}
+
+main {
+  flex: 1;
+  padding-top: 0;
+}
+
+/* Tighten spacing under fixed navbar (non-cover pages only) */
+body:not(.cover-page) main {
+  padding-top: 0.5rem;
+}
+
+/* =====================================
+   2. NAVBAR
+   ===================================== */
+
+.navbar {
+  background-color: #000 !important;
+}
+
+.navbar-dark .nav-link {
+  color: white;
+}
+
+.navbar-dark .nav-link:hover {
+  color: greenyellow;
+}
+
+/* Make sure dropdown anchors position the menu correctly */
+.navbar .dropdown {
+  position: relative;          /* IMPORTANT: anchors the absolute menu */
+}
+
+/* Default Bootstrap behavior expects .dropdown-menu to be hidden.
+   DO NOT set display:block globally, or it will drop into the layout. */
+.navbar .dropdown-menu {
+  position: absolute;
+  top: 100%;                   /* directly below "Game" */
+  left: 0;
+  z-index: 1050;
+
+  background-color: #000;
+  border: 1px solid #333;
+
+  /* nice animation */
+  display: block;              /* keep renderable for animation... */
+  opacity: 0;                  /* ...but invisible */
+  visibility: hidden;          /* not clickable */
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+
+  margin-top: 0;               /* ✅ removed the 35px push-down */
+  min-width: 12rem;
+  padding: 0.4rem 0;
+}
+
+/* Show dropdown on hover (desktop) */
+@media (min-width: 768px) {
+  .navbar .dropdown:hover > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+
+/* Keep the dropdown clickable on mobile (Bootstrap uses click).
+   This prevents hover rules messing with small screens. */
+@media (max-width: 767.98px) {
+  .navbar .dropdown-menu {
+    position: static;          /* inside collapsed menu */
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    border: none;
+    padding-left: 0.25rem;
+  }
+}
+
+/* Rotate arrow (optional but nice) */
+.navbar .dropdown-toggle::after {
+  transition: transform 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .navbar .dropdown:hover .dropdown-toggle::after {
+    transform: rotate(180deg);
+  }
+}
+
+/* Dropdown items */
+.dropdown-item {
+  color: #fff;
+  background-color: transparent;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active {
+  background-color: #1a1a1a;
+  color: greenyellow;
+  text-decoration: underline;
+}
+
+/* Highlight "Game" when dropdown is hovered */
+@media (min-width: 768px) {
+  .navbar .nav-item.dropdown:hover .nav-link,
+  .navbar .nav-item.dropdown:hover .dropdown-toggle {
+    color: greenyellow !important;
+    text-decoration: underline;
+  }
+}
+
+/* Extra navbar spacing so logo is not glued to the left */
+.navbar-brand {
+  padding-left: 0.75rem;
+}
+
+.navbar .container {
+  padding-left: 2.5rem;
+  padding-right: 1.5rem;
+}
+
+
+/* =====================================
+   4. TYPOGRAPHY
+   ===================================== */
+
+.hello-title {
+  text-align: left;
+  margin: 0 0 12px 0;
+}
+
+
+/* ===============================
+   INDEX / COVER PAGE
+   =============================== */
+
+.cover {
+  position: relative;
+  width: 100%;
+  height: 40vh;              /* ✅ controls height */
+  max-height: 420px;         /* ✅ never too tall */
+  overflow: hidden;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* ✅ crops nicely instead of stretching */
+  display: block;
+}
+
+/* Title on image */
+.cover-text {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  font-family: 'Caveat', cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: white;
+
+  text-shadow: 0 6px 20px rgba(0,0,0,0.8);
+}
+
+/* ===============================
+   COVER MENU (VERTICAL)
+   =============================== */
+
+.cover-menu {
+  display: flex;
+  flex-direction: column;    /* ✅ vertical links */
+  align-items: center;
+  justify-content: center;
+
+  margin: 2rem auto;
+  gap: 14px;
+}
+
+/* Menu links */
+.cover-menu a {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  color: #000;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cover-menu a:hover {
+  color: orange;
+  transform: scale(1.1);
+}
+
+.cover-text {
+  font-size: clamp(1.4rem, 3.5vw, 3rem);
+}
+
+/* Remove navbar spacing ONLY on index */
+.cover-page {
+  padding-top: 0 !important;
+  margin-top: 0;
+}
+
+
+/* =====================================
+   ACCORDION
+   ===================================== */
+
+/* Make jQuery UI accordion headers black */
+#accordion h3.ui-accordion-header {
+  background: #000 !important;
+  color: #fff !important;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+/* Make opened accordion panel background light green */
+#accordion .ui-accordion-content {
+  background: #eaffea; /* soft Minecraft grass green */
+  transition: background 0.3s;
+  border-radius: 0 0 8px 8px;
+}
+
+
+
+/* =====================================
+   5. CONTACT PAGE
+   ===================================== */
+
+.content-narrow {
+  max-width: 850px;
+  margin: 1.5rem auto 0; /* ✅ extra space below navbar */
+}
+
+/* CONTACT TEXT + IMAGE WRAP (DESKTOP) */
+@media (min-width: 992px) {
+  .contactasian-png {
+    float: right;
+    width: 300px;
+    margin: 0 0 16px 24px; /* space between image and text */
+    border-radius: 12px;
+  }
+}
+
+/* text */
+.contact-wrapper .lead {
+  flex: 1;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ✅ image RIGHT */
+.contactasian-png {
+  width: clamp(220px, 28%, 320px);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+input[type="submit"] {
+  width: auto;              
+  display: inline-block;
+  padding: 10px 32px;
+  margin-top: 12px;
+}
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 576px) {
+
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contactasian-png {
+    width: 75%;
+    max-width: 260px;
+    margin-top: 10px;
+  }
+}
+
+/* =====================================
+   6. HOME PAGE IMAGE FIX ✅
+   ===================================== */
+
+.banner-image {
+  width: 100%;
+  max-height: 400px;        /* ✅ prevents huge image */
+  object-fit: cover;
+}
+
+/* Optional: smaller on mobile */
+@media (max-width: 576px) {
+  .banner-image {
+    max-height: 250px;
+  }
+}
+
+/* =====================================
+   7. FORM
+   ===================================== */
+
+form {
+  margin-top: 2rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 180px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: greenyellow;
+}
+
+/* =====================================
+   8. FOOTER
+   ===================================== */
+
+.footer {
+  background: black;
+  color: white;
+  padding: 1rem 0;
+}
